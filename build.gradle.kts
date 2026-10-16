@@ -35,11 +35,11 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:26.3.build.175-stable")
+    compileOnly("io.papermc.paper:paper-api:26.3.build.200-stable")
     // 12.1.0 shade jar is self-contained; its shadowed-variant metadata lists unpublished modules
     implementation("dev.jorel:commandapi-paper-shade:12.1.0") { isTransitive = false }
     implementation("de.tr7zw:item-nbt-api:2.16.1")
-    compileOnly("me.clip:placeholderapi:2.12.2")
+    compileOnly("me.clip:placeholderapi:2.12.3")
 }
 
 tasks.jar {
