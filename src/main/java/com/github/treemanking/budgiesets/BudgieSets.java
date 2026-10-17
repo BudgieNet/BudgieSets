@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.commands.CommandManager;
 import com.github.treemanking.budgiesets.managers.HookManager;
 import com.github.treemanking.budgiesets.managers.armorsets.ArmorSetManager;
@@ -22,6 +23,8 @@ public final class BudgieSets extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        ChatUtil.init(this)
+                .prefix(() -> "&7[&bBudgieSets&7] &r");
         budgieSets = this;
 
         CommandAPI.onEnable();

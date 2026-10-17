@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.managers.configuration;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.utilities.EquipStatus;
 import com.github.treemanking.budgiesets.BudgieSets;
 import com.github.treemanking.budgiesets.effects.EffectProcessor;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static com.github.treemanking.budgiesets.utilities.ChatUtils.warn;
+import static com.budgienet.chatutil.ChatUtil.warn;
 
 /**
  * The EffectsManager class is responsible for processing effects defined in the configuration file for a specific event.

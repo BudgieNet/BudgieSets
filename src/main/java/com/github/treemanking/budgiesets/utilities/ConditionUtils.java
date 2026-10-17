@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.utilities;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.BudgieSets;
 import com.github.treemanking.budgiesets.managers.HookManager;
 import me.clip.placeholderapi.PlaceholderAPI;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static com.github.treemanking.budgiesets.utilities.ChatUtils.warn;
+import static com.budgienet.chatutil.ChatUtil.warn;
 import static com.github.treemanking.budgiesets.utilities.ConfigUtils.castToListOfString;
 import static com.github.treemanking.budgiesets.utilities.ProcessorKeys.CHANCE_KEY;
 import static com.github.treemanking.budgiesets.utilities.ProcessorKeys.CONDITIONS_KEY;

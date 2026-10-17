@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.commands.subcommands;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.commands.SubCommand;
 import com.github.treemanking.budgiesets.managers.armorsets.ArmorSetFiles;
 import dev.jorel.commandapi.CommandAPICommand;
@@ -38,17 +39,17 @@ public class RenameSubCommand implements SubCommand {
                     String newName = (String) args.get("newName");
 
                     if (files.exists(newName)) {
-                        sender.sendMessage(ChatColor.RED + newName + " already exists, so " + oldName
-                                + " was not renamed.");
+                        ChatUtil.sendMsg(sender, ChatColor.RED + newName + " already exists, so " + oldName
+                                + " was not renamed.", false);
                         return;
                     }
 
                     if (files.rename(oldName, newName)) {
-                        sender.sendMessage(ChatColor.GREEN + oldName + " was renamed to " + newName + ".");
+                        ChatUtil.sendMsg(sender, ChatColor.GREEN + oldName + " was renamed to " + newName + ".", false);
                         return;
                     }
 
-                    sender.sendMessage(ChatColor.RED + oldName + " could not be renamed.");
+                    ChatUtil.sendMsg(sender, ChatColor.RED + oldName + " could not be renamed.", false);
                 });
     }
 }

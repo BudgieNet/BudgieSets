@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.managers.configuration;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.managers.armorsets.ArmorSetFiles;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -7,7 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.IOException;
 
-import static com.github.treemanking.budgiesets.utilities.ChatUtils.*;
+import static com.budgienet.chatutil.ChatUtil.*;
 
 /**
  * The ConfigurationManager class handles the loading, saving, and initialization

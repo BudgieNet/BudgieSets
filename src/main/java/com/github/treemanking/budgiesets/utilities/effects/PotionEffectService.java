@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.utilities.effects;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.BudgieSets;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static com.github.treemanking.budgiesets.utilities.ChatUtils.warn;
+import static com.budgienet.chatutil.ChatUtil.warn;
 
 /**
  * Tracks and applies the infinite-duration potion effects granted by armor sets.

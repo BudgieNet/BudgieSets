@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.effects;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.utilities.EquipStatus;
 import com.github.treemanking.budgiesets.BudgieSets;
 import org.bukkit.entity.Entity;
@@ -8,7 +9,7 @@ import org.bukkit.event.Event;
 
 import java.util.List;
 
-import static com.github.treemanking.budgiesets.utilities.ChatUtils.warn;
+import static com.budgienet.chatutil.ChatUtil.warn;
 
 public interface PlayerEffectProcessor extends EffectProcessor {
 

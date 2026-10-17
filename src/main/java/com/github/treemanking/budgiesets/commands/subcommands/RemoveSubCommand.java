@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.commands.subcommands;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.commands.SubCommand;
 import com.github.treemanking.budgiesets.managers.armorsets.ArmorSetFiles;
 import dev.jorel.commandapi.CommandAPICommand;
@@ -37,11 +38,11 @@ public class RemoveSubCommand implements SubCommand {
                     String armorSetName = (String) args.get("name");
 
                     switch (files.delete(armorSetName)) {
-                        case DELETED -> sender.sendMessage(ChatColor.GREEN + armorSetName + " was successfully removed.");
-                        case NOT_FOUND -> sender.sendMessage(ChatColor.RED + armorSetName
-                                + " does not exist and therefore cannot be deleted.");
-                        case FAILED -> sender.sendMessage(ChatColor.RED + armorSetName
-                                + " exists but could not be deleted. See the server console for details.");
+                        case DELETED -> ChatUtil.sendMsg(sender, ChatColor.GREEN + armorSetName + " was successfully removed.", false);
+                        case NOT_FOUND -> ChatUtil.sendMsg(sender, ChatColor.RED + armorSetName
+                                + " does not exist and therefore cannot be deleted.", false);
+                        case FAILED -> ChatUtil.sendMsg(sender, ChatColor.RED + armorSetName
+                                + " exists but could not be deleted. See the server console for details.", false);
                     }
                 });
     }

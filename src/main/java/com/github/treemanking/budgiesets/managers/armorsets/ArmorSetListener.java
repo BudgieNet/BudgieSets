@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.managers.armorsets;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.utilities.EquipStatus;
 import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent;
 import com.github.treemanking.budgiesets.BudgieSets;
@@ -101,13 +102,13 @@ public class ArmorSetListener implements Listener, ArmorSetUtilities {
     /** Activates the armor set for the player, updating their equip status and sending a message. */
     private void activateSet(Player player) {
         playerEquipStatusHashMap.put(player.getUniqueId(), EquipStatus.EQUIPPED);
-        player.sendMessage(ChatColor.GREEN + "You are now wearing the " + armorSetName + " set.");
+        ChatUtil.sendMsg(player, ChatColor.GREEN + "You are now wearing the " + armorSetName + " set.", false);
     }
 
     /** Deactivates the armor set for the player, updating their equip status, removing bonuses, and sending a message. */
     private void deactivateSet(Player player) {
         playerEquipStatusHashMap.put(player.getUniqueId(), EquipStatus.NOT_EQUIPPED);
-        player.sendMessage(ChatColor.RED + "You are now not wearing the " + armorSetName + " set and will lose all bonuses.");
+        ChatUtil.sendMsg(player, ChatColor.RED + "You are now not wearing the " + armorSetName + " set and will lose all bonuses.", false);
         AttributeService.removeAllAttributes(player);
         PotionEffectService.removePotionEffects(player);
     }

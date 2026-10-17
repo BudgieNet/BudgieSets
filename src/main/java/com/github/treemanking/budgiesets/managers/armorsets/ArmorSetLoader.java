@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.managers.armorsets;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.BudgieSets;
 import com.github.treemanking.budgiesets.managers.configuration.ConfigurationManager;
 import com.github.treemanking.budgiesets.utilities.effects.PotionEffectService;
@@ -10,7 +11,7 @@ import org.bukkit.plugin.RegisteredListener;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.github.treemanking.budgiesets.utilities.ChatUtils.*;
+import static com.budgienet.chatutil.ChatUtil.*;
 
 /**
  * Handles the runtime lifecycle of armor sets: registering their listeners, unregistering

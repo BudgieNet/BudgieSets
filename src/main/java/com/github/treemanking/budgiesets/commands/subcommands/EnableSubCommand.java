@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.commands.subcommands;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.commands.SubCommand;
 import com.github.treemanking.budgiesets.managers.armorsets.ArmorSetFiles;
 import com.github.treemanking.budgiesets.managers.armorsets.ArmorSetLoader;
@@ -43,14 +44,14 @@ public class EnableSubCommand implements SubCommand {
                     String resolvedName = result.armorSetName();
 
                     switch (result.status()) {
-                        case LOADED -> sender.sendMessage(ChatColor.GREEN + resolvedName
-                                + " has been loaded into the server.");
-                        case ALREADY_LOADED -> sender.sendMessage(ChatColor.RED + resolvedName
-                                + " has already been loaded.");
-                        case NOT_FOUND -> sender.sendMessage(ChatColor.RED + resolvedName
-                                + " does not exist and therefore cannot be loaded.");
-                        case ERROR -> sender.sendMessage(ChatColor.RED + resolvedName
-                                + " failed to load. See the server console for details.");
+                        case LOADED -> ChatUtil.sendMsg(sender, ChatColor.GREEN + resolvedName
+                                + " has been loaded into the server.", false);
+                        case ALREADY_LOADED -> ChatUtil.sendMsg(sender, ChatColor.RED + resolvedName
+                                + " has already been loaded.", false);
+                        case NOT_FOUND -> ChatUtil.sendMsg(sender, ChatColor.RED + resolvedName
+                                + " does not exist and therefore cannot be loaded.", false);
+                        case ERROR -> ChatUtil.sendMsg(sender, ChatColor.RED + resolvedName
+                                + " failed to load. See the server console for details.", false);
                     }
                 });
     }

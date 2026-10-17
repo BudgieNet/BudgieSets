@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.effects.processors;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.utilities.EquipStatus;
 import com.github.treemanking.budgiesets.BudgieSets;
 import com.github.treemanking.budgiesets.effects.PlayerEffectProcessor;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import com.github.treemanking.budgiesets.utilities.effects.AttributeService;
 
-import static com.github.treemanking.budgiesets.utilities.ChatUtils.warn;
+import static com.budgienet.chatutil.ChatUtil.warn;
 import static com.github.treemanking.budgiesets.utilities.ConfigUtils.getConfigValue;
 import static com.github.treemanking.budgiesets.utilities.ProcessorKeys.ATTRIBUTE_KEY;
 import static com.github.treemanking.budgiesets.utilities.ProcessorKeys.OPERATION_KEY;

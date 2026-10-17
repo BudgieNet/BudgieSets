@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.managers.armorsets;
 
+import com.budgienet.chatutil.ChatUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.BufferedWriter;
@@ -9,7 +10,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import static com.github.treemanking.budgiesets.utilities.ChatUtils.*;
+import static com.budgienet.chatutil.ChatUtil.*;
 
 /**
  * The single source of truth for the location, naming and on-disk manipulation of

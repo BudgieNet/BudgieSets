@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.effects.processors;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.utilities.EquipStatus;
 import com.destroystokyo.paper.ParticleBuilder;
 import com.github.treemanking.budgiesets.BudgieSets;
@@ -17,7 +18,7 @@ import org.bukkit.material.MaterialData;
 import java.util.List;
 import java.util.Map;
 
-import static com.github.treemanking.budgiesets.utilities.ChatUtils.*;
+import static com.budgienet.chatutil.ChatUtil.*;
 import static com.github.treemanking.budgiesets.utilities.ConfigUtils.getConfigValue;
 import static com.github.treemanking.budgiesets.utilities.ColorUtils.convertHexToRGB;
 import static com.github.treemanking.budgiesets.utilities.ProcessorKeys.PARTICLE_KEY;

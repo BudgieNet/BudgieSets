@@ -26,6 +26,15 @@ tasks.withType<Javadoc> {
 }
 
 repositories {
+    maven {
+        // com.budgienet:chatutil - needs gpr.user / gpr.key (read:packages token) in ~/.gradle/gradle.properties
+        url = uri("https://maven.pkg.github.com/BudgieNet/ChatUtil")
+        credentials {
+            username = findProperty("gpr.user") as String? ?: System.getenv("GITHUB_ACTOR")
+            password = findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
+        }
+        content { includeGroup("com.budgienet") }
+    }
     mavenLocal()
     maven ("https://repo.papermc.io/repository/maven-public/")
     maven ("https://oss.sonatype.org/content/groups/public/")
@@ -36,6 +45,7 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:26.3.build.200-stable")
+    implementation("com.budgienet:chatutil:1.1.0")
     // 12.1.0 shade jar is self-contained; its shadowed-variant metadata lists unpublished modules
     implementation("dev.jorel:commandapi-paper-shade:12.1.0") { isTransitive = false }
     implementation("de.tr7zw:item-nbt-api:2.16.1")
@@ -47,6 +57,7 @@ tasks.jar {
 }
 
 tasks.withType<ShadowJar> {
+    relocate("com.budgienet.chatutil", "com.github.treemanking.budgiesets.chatutil")
     archiveFileName.set("${project.name}-${project.version}.jar")
     relocate("de.tr7zw.changeme.nbtapi", "com.github.treemanking.api.nbtapi")
     relocate("dev.jorel.commandapi", "com.github.treemanking.api.commandapi")

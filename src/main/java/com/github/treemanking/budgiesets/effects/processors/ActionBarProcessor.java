@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.effects.processors;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.utilities.EquipStatus;
 import com.github.treemanking.budgiesets.BudgieSets;
 import com.github.treemanking.budgiesets.effects.PlayerEffectProcessor;
@@ -9,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Map;
 
-import static com.github.treemanking.budgiesets.utilities.ChatUtils.warn;
+import static com.budgienet.chatutil.ChatUtil.warn;
 import static com.github.treemanking.budgiesets.utilities.ConfigUtils.getConfigValue;
 import static com.github.treemanking.budgiesets.utilities.ProcessorKeys.TEXT_KEY;
 
@@ -54,7 +55,7 @@ public class ActionBarProcessor implements PlayerEffectProcessor {
      * @param actionBarText The text to display in the action bar.
      */
     private void applyActionBar(@NotNull Player player, @NotNull String actionBarText) {
-        player.sendActionBar('&', actionBarText);
+        ChatUtil.sendActionBar(player, actionBarText);
     }
 
     /**

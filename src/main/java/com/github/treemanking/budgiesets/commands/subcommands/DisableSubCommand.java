@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.commands.subcommands;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.commands.SubCommand;
 import com.github.treemanking.budgiesets.managers.armorsets.ArmorSetLoader;
 import com.github.treemanking.budgiesets.managers.armorsets.ArmorSetManager;
@@ -38,12 +39,12 @@ public class DisableSubCommand implements SubCommand {
                     String armorSetName = (String) args.get("enabledSet");
 
                     switch (loader.unload(armorSetName)) {
-                        case UNLOADED -> sender.sendMessage(ChatColor.GREEN + armorSetName
-                                + " has been unloaded from the server.");
-                        case NOT_LOADED -> sender.sendMessage(ChatColor.RED + armorSetName
-                                + " is not currently loaded.");
-                        case RENAME_FAILED -> sender.sendMessage(ChatColor.RED + armorSetName
-                                + " was unloaded but its file could not be renamed. See the server console for details.");
+                        case UNLOADED -> ChatUtil.sendMsg(sender, ChatColor.GREEN + armorSetName
+                                + " has been unloaded from the server.", false);
+                        case NOT_LOADED -> ChatUtil.sendMsg(sender, ChatColor.RED + armorSetName
+                                + " is not currently loaded.", false);
+                        case RENAME_FAILED -> ChatUtil.sendMsg(sender, ChatColor.RED + armorSetName
+                                + " was unloaded but its file could not be renamed. See the server console for details.", false);
                     }
                 });
     }

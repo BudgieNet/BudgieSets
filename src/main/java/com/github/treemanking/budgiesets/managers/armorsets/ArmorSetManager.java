@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.managers.armorsets;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.BudgieSets;
 import com.github.treemanking.budgiesets.managers.configuration.ConfigurationManager;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -7,7 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import java.io.File;
 import java.util.*;
 
-import static com.github.treemanking.budgiesets.utilities.ChatUtils.*;
+import static com.budgienet.chatutil.ChatUtil.*;
 
 /**
  * The ArmorSetManager class manages the registration of ArmorSetListeners

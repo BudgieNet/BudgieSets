@@ -1,12 +1,13 @@
 package com.github.treemanking.budgiesets.utilities;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.BudgieSets;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.github.treemanking.budgiesets.utilities.ChatUtils.warn;
+import static com.budgienet.chatutil.ChatUtil.warn;
 
 /**
  * Static helpers for reading values out of the raw configuration maps supplied by SnakeYAML.

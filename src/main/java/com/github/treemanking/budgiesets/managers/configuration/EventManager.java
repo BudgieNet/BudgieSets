@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.managers.configuration;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.utilities.EquipStatus;
 import com.github.treemanking.budgiesets.BudgieSets;
 import com.github.treemanking.budgiesets.events.EventProcessor;
@@ -9,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-import static com.github.treemanking.budgiesets.utilities.ChatUtils.warn;
+import static com.budgienet.chatutil.ChatUtil.warn;
 
 /**
  * The EventManager class is responsible for registering events defined in the configuration file.

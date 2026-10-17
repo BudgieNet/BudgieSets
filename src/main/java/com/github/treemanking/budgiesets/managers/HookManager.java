@@ -1,9 +1,10 @@
 package com.github.treemanking.budgiesets.managers;
 
+import com.budgienet.chatutil.ChatUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import static com.github.treemanking.budgiesets.utilities.ChatUtils.log;
-import static com.github.treemanking.budgiesets.utilities.ChatUtils.warn;
+import static com.budgienet.chatutil.ChatUtil.log;
+import static com.budgienet.chatutil.ChatUtil.warn;
 
 /**
  * The HookManager class is responsible for checking the availability of

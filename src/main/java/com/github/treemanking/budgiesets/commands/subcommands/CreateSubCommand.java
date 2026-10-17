@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.commands.subcommands;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.commands.SubCommand;
 import com.github.treemanking.budgiesets.managers.armorsets.ArmorSetFiles;
 import com.github.treemanking.budgiesets.managers.armorsets.ArmorSetLoader;
@@ -40,14 +41,14 @@ public class CreateSubCommand implements SubCommand {
                         switch (files.create(armorSetName, ArmorSetFiles.defaultYaml())) {
                             case CREATED -> {
                                 loader.load(armorSetName);
-                                sender.sendMessage(ChatColor.GREEN + armorSetName + " was successfully generated and loaded.");
+                                ChatUtil.sendMsg(sender, ChatColor.GREEN + armorSetName + " was successfully generated and loaded.", false);
                             }
-                            case ALREADY_EXISTS -> sender.sendMessage(ChatColor.RED + armorSetName
-                                    + " already exists and was not overwritten.");
+                            case ALREADY_EXISTS -> ChatUtil.sendMsg(sender, ChatColor.RED + armorSetName
+                                    + " already exists and was not overwritten.", false);
                         }
                     } catch (IOException exception) {
-                        sender.sendMessage(ChatColor.RED + "Failed to create " + armorSetName
-                                + ". See the server console for details.");
+                        ChatUtil.sendMsg(sender, ChatColor.RED + "Failed to create " + armorSetName
+                                + ". See the server console for details.", false);
                     }
                 });
     }

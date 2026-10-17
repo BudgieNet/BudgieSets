@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.commands.subcommands;
 
+import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.commands.SubCommand;
 import com.github.treemanking.budgiesets.managers.armorsets.ArmorSetLoader;
 import dev.jorel.commandapi.CommandAPICommand;
@@ -27,7 +28,7 @@ public class ReloadSubCommand implements SubCommand {
                 .withPermission("budgiesets.reload")
                 .executes((sender, args) -> {
                     loader.reload();
-                    sender.sendMessage(ChatColor.GREEN + "BudgieSets was successfully reloaded.");
+                    ChatUtil.sendMsg(sender, ChatColor.GREEN + "BudgieSets was successfully reloaded.", false);
                 });
     }
 }
