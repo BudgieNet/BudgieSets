@@ -1,8 +1,8 @@
-name: BudgieSets
-version: ${projectVersion}
-main: com.github.treemanking.budgiesets.BudgieSets
-api-version: '26.3'
-author: TreemanKing
+name: ${name}
+version: '${version}'
+main: ${main}
+api-version: '${apiVersion}'
+author: ${author}
 
 softdepend:
   - PlaceholderAPI
