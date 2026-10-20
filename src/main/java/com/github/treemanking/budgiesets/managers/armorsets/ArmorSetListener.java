@@ -103,6 +103,7 @@ public class ArmorSetListener implements Listener, ArmorSetUtilities {
     private void activateSet(Player player) {
         playerEquipStatusHashMap.put(player.getUniqueId(), EquipStatus.EQUIPPED);
         ChatUtil.sendMsg(player, ChatColor.GREEN + "You are now wearing the " + armorSetName + " set.", false);
+        Bukkit.getPluginManager().callEvent(new ArmorSetStatusChangeEvent(player, armorSetName, EquipStatus.EQUIPPED));
     }
 
     /** Deactivates the armor set for the player, updating their equip status, removing bonuses, and sending a message. */
@@ -111,6 +112,7 @@ public class ArmorSetListener implements Listener, ArmorSetUtilities {
         ChatUtil.sendMsg(player, ChatColor.RED + "You are now not wearing the " + armorSetName + " set and will lose all bonuses.", false);
         AttributeService.removeAllAttributes(player);
         PotionEffectService.removePotionEffects(player);
+        Bukkit.getPluginManager().callEvent(new ArmorSetStatusChangeEvent(player, armorSetName, EquipStatus.NOT_EQUIPPED));
     }
 
     /**
