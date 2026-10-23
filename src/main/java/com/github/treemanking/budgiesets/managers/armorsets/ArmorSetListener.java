@@ -3,6 +3,7 @@ package com.github.treemanking.budgiesets.managers.armorsets;
 import com.budgienet.chatutil.ChatUtil;
 import com.github.treemanking.budgiesets.utilities.EquipStatus;
 import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent;
+import com.destroystokyo.paper.event.player.PlayerPostRespawnEvent;
 import com.github.treemanking.budgiesets.BudgieSets;
 import com.github.treemanking.budgiesets.managers.armorsets.utilities.ArmorSetUtilities;
 import com.github.treemanking.budgiesets.managers.configuration.EventManager;
@@ -15,6 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.HashMap;
@@ -58,7 +60,36 @@ public class ArmorSetListener implements Listener, ArmorSetUtilities {
      */
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerEquip(PlayerArmorChangeEvent event) {
+        scheduleEquipCheck(event.getPlayer());
+    }
+
+    /**
+     * Handles the death of a player wearing the set.
+     * <p>
+     * Death clears the player's potion effects, but with keepInventory the armor never leaves
+     * the player, so no PlayerArmorChangeEvent fires. Silently drop the set here so the check
+     * after respawn activates it again and re-applies its effects.
+     */
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getPlayer();
+        if (playerEquipStatusHashMap.get(player.getUniqueId()) != EquipStatus.EQUIPPED) return;
+
+        playerEquipStatusHashMap.put(player.getUniqueId(), EquipStatus.NOT_EQUIPPED);
+        AttributeService.removeAllAttributes(player);
+        PotionEffectService.removePotionEffects(player);
+    }
+
+    /**
+     * Re-evaluates the set after a respawn, re-activating it if the player kept their armor.
+     */
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onPlayerRespawn(PlayerPostRespawnEvent event) {
+        scheduleEquipCheck(event.getPlayer());
+    }
+
+    /** Schedules a single deferred equip-status check for the player, unless one is already pending. */
+    private void scheduleEquipCheck(Player player) {
         UUID uuid = player.getUniqueId();
 
         // Check if check is already scheduled
