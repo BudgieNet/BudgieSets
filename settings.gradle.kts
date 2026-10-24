@@ -13,7 +13,7 @@ pluginManagement {
 }
 
 plugins {
-    id("com.budgienet.settings") version "1.0.0"
+    id("com.budgienet.settings") version "1.1.0"
 }
 
 rootProject.name = "BudgieSets"
