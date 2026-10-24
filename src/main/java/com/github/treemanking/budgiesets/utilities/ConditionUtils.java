@@ -42,8 +42,9 @@ public final class ConditionUtils {
      */
     public static boolean checkMap(Map<?, ?> map, Player player, Map<UUID, Long> cooldownMap) {
         List<String> conditions = castToListOfString(map.get(CONDITIONS_KEY));
-        Double chance = (Double) map.get(CHANCE_KEY);
-        Integer cooldown = (Integer) map.get(COOLDOWN_KEY);
+        // YAML reads "1" as an Integer and "2.5" as a Double, so accept either
+        Double chance = map.get(CHANCE_KEY) instanceof Number number ? number.doubleValue() : null;
+        Double cooldown = map.get(COOLDOWN_KEY) instanceof Number number ? number.doubleValue() : null;
 
         // Check conditions
         if (conditions != null && !conditions.isEmpty()) {
@@ -66,7 +67,7 @@ public final class ConditionUtils {
         if (cooldown != null) {
             long currentTime = System.currentTimeMillis();
             Long lastUsedTime = cooldownMap.get(player.getUniqueId());
-            if (lastUsedTime != null && (currentTime - lastUsedTime) / 1000 < cooldown.longValue()) {
+            if (lastUsedTime != null && currentTime - lastUsedTime < cooldown * 1000) {
                 return false; // Cooldown not met
             }
             cooldownMap.put(player.getUniqueId(), currentTime); // Update cooldown map with current time

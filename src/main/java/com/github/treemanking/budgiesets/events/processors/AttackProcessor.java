@@ -51,8 +51,9 @@ public class AttackProcessor implements EventProcessor {
             switch (eventType) {
                 case "COMBAT_PLAYER":
                     if (damageCause.equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK)
-                            && damagedEntity.getType().equals(EntityType.PLAYER)) {
-                        player = (Player) event.getDamager();
+                            && damagedEntity.getType().equals(EntityType.PLAYER)
+                            && attackingEnemy instanceof Player attacker) {
+                        player = attacker;
                     }
                     break;
                 case "COMBAT_PLAYER_PROJECTILE":
@@ -71,8 +72,9 @@ public class AttackProcessor implements EventProcessor {
                     break;
                 case "COMBAT_MOB":
                     if (damageCause.equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK)
-                            && damagedEntity instanceof Mob) {
-                        player = (Player) attackingEnemy;
+                            && damagedEntity instanceof Mob
+                            && attackingEnemy instanceof Player attacker) {
+                        player = attacker;
                     }
                     break;
                 case "COMBAT_MOB_PROJECTILE":
@@ -80,7 +82,8 @@ public class AttackProcessor implements EventProcessor {
                     if (damageCause.equals(EntityDamageEvent.DamageCause.PROJECTILE)) {
                         if (attackingEnemy.getType().equals(EntityType.ARROW)) {
                             Arrow arrow = (Arrow) attackingEnemy;
-                            player = (Player) arrow.getShooter();
+                            if (!(arrow.getShooter() instanceof Player shooter)) break;
+                            player = shooter;
                             break;
                         } else if (attackingEnemy.getType().equals(EntityType.SPECTRAL_ARROW)) {
                             SpectralArrow arrow = (SpectralArrow) attackingEnemy;
@@ -94,7 +97,8 @@ public class AttackProcessor implements EventProcessor {
                     if (damageCause.equals(EntityDamageEvent.DamageCause.PROJECTILE)) {
                         if (attackingEnemy.getType().equals(EntityType.ARROW)) {
                             Arrow arrow = (Arrow) attackingEnemy;
-                            player = (Player) arrow.getShooter();
+                            if (!(arrow.getShooter() instanceof Player shooter)) break;
+                            player = shooter;
                             break;
                         }
                     } else if (damageCause.equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK)) {
@@ -103,7 +107,7 @@ public class AttackProcessor implements EventProcessor {
                     }
             }
             if (player == null) return;
-            if (!playerEquipStatus.containsKey(player.getUniqueId())) return;
+            if (playerEquipStatus.get(player.getUniqueId()) != EquipStatus.EQUIPPED) return;
 
             EquipStatus currentStatus = playerEquipStatus.get(player.getUniqueId());
             if (checkMap(effectsMap, player, cooldownMap)) {

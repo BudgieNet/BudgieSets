@@ -38,7 +38,7 @@ public class ConsumeProcessor implements EventProcessor {
         private void onPlayerConsume(PlayerItemConsumeEvent consumeEvent) {
             Player player = consumeEvent.getPlayer();
 
-            if (!playerEquipStatus.containsKey(player.getUniqueId())) return;
+            if (playerEquipStatus.get(player.getUniqueId()) != EquipStatus.EQUIPPED) return;
             EquipStatus currentStatus = playerEquipStatus.get(player.getUniqueId());
             if (checkMap(effectsMap, player, cooldownMap)) {
                 effectManager.processEffectsMap(effectsMap, player, currentStatus, consumeEvent);

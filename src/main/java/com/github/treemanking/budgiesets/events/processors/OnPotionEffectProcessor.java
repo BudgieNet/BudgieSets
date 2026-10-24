@@ -40,7 +40,7 @@ public class OnPotionEffectProcessor implements EventProcessor {
         private void onPlayerPotionEffect(EntityPotionEffectEvent event) {
             if (!(event.getEntity() instanceof Player player)) return;
             if (event.getNewEffect() == null) return;
-            if (!playerEquipStatus.containsKey(player.getUniqueId())) return;
+            if (playerEquipStatus.get(player.getUniqueId()) != EquipStatus.EQUIPPED) return;
 
             EquipStatus currentStatus = playerEquipStatus.get(player.getUniqueId());
 

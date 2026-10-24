@@ -54,6 +54,9 @@ public class DamagedProcessor implements EventProcessor {
             Entity damagedEntity = event.getEntity();
             EntityDamageEvent.DamageCause damageCause = event.getCause();
 
+            // Every damage type below is about the damaged player, so a mob being hit never applies.
+            if (!(damagedEntity instanceof Player)) return;
+
             // TODO: Add more types and check within list instead of having to make multiple events
             switch (eventType) {
                 case "DAMAGE_PLAYER":
@@ -99,7 +102,7 @@ public class DamagedProcessor implements EventProcessor {
                     player = (Player) damagedEntity;
             }
             if (player == null) return;
-            if (!playerEquipStatus.containsKey(player.getUniqueId())) return;
+            if (playerEquipStatus.get(player.getUniqueId()) != EquipStatus.EQUIPPED) return;
 
             EquipStatus currentStatus = playerEquipStatus.get(player.getUniqueId());
             if (checkMap(effectsMap, player, cooldownMap)) {

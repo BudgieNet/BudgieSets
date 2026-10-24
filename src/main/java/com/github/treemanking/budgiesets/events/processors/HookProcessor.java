@@ -42,7 +42,7 @@ public class HookProcessor implements EventProcessor {
             Player player = fishEvent.getPlayer();
             Entity entity = null;
 
-            if (!playerEquipStatus.containsKey(player.getUniqueId())) return;
+            if (playerEquipStatus.get(player.getUniqueId()) != EquipStatus.EQUIPPED) return;
             EquipStatus currentStatus = playerEquipStatus.get(player.getUniqueId());
 
             // Get Target

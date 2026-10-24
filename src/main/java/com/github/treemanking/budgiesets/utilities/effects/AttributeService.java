@@ -1,5 +1,6 @@
 package com.github.treemanking.budgiesets.utilities.effects;
 
+import com.github.treemanking.budgiesets.BudgieSets;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -15,22 +16,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Tracks and applies the attribute modifiers granted by armor sets.
  *
- * <p>The backing map and the scheduler are private: callers interact through the operations
+ * <p>The backing map is private: callers interact through the operations
  * below rather than mutating shared state directly.</p>
  */
 public final class AttributeService {
-
-    /**
-     * A single-threaded scheduled executor service used to schedule tasks for attribute removal.
-     */
-    private static final ScheduledExecutorService EXECUTOR = Executors.newSingleThreadScheduledExecutor();
 
     /**
      * Attribute modifiers applied by this plugin, keyed by player UUID.
@@ -57,13 +50,29 @@ public final class AttributeService {
 
         NamespacedKey key = new NamespacedKey("budgiesets", "modifier_" + UUID.randomUUID());
         AttributeModifier attributeModifier = new AttributeModifier(key, amount, operation, EquipmentSlotGroup.ANY);
-        attributeInstance.addModifier(attributeModifier);
+        // Transient, so it isn't saved with the player and can't outlive the set across a relog or restart
+        attributeInstance.addTransientModifier(attributeModifier);
 
         TRACKED_MODIFIERS.computeIfAbsent(player.getUniqueId(), uuid -> new ArrayList<>()).add(attributeModifier);
 
         if (time != null && time > 0) {
-            EXECUTOR.schedule(() -> removeAllAttributes(player), time, TimeUnit.SECONDS);
+            // On the main thread, and only this modifier: the set's other bonuses stay
+            Bukkit.getScheduler().runTaskLater(BudgieSets.getBudgieSets(),
+                    () -> removeAttribute(player, attribute, attributeModifier), time * 20L);
         }
+    }
+
+    /**
+     * Removes one tracked modifier, unless it already went with the rest of the player's set
+     * (unequip, death or quit).
+     */
+    private static void removeAttribute(@NotNull Player player, @NotNull Attribute attribute, @NotNull AttributeModifier modifier) {
+        List<AttributeModifier> modifiers = TRACKED_MODIFIERS.get(player.getUniqueId());
+        if (modifiers == null || !modifiers.remove(modifier)) return;
+        if (modifiers.isEmpty()) TRACKED_MODIFIERS.remove(player.getUniqueId());
+
+        AttributeInstance instance = player.getAttribute(attribute);
+        if (instance != null) instance.removeModifier(modifier);
     }
 
     /**
@@ -95,13 +104,5 @@ public final class AttributeService {
         TRACKED_MODIFIERS.clear();
     }
 
-    /**
-     * Shuts down the scheduler backing timed attribute removal.
-     *
-     * <p>Without this the executor thread survives a plugin reload and leaks.</p>
-     */
-    public static void shutdown() {
-        EXECUTOR.shutdownNow();
-    }
 }
 

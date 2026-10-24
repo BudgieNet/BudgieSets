@@ -22,7 +22,6 @@ public final class ShutdownTasks {
     public static void runAll() {
         removeAllPermPotionEffects();
         removeAllPlayersAttributes();
-        AttributeService.shutdown();
     }
 
     /**

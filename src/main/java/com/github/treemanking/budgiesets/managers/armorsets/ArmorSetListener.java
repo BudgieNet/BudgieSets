@@ -153,9 +153,14 @@ public class ArmorSetListener implements Listener, ArmorSetUtilities {
      */
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerLeave(PlayerQuitEvent event) {
-        // Remove the player from the map when the player leaves the server
-        playerEquipStatusHashMap.remove(event.getPlayer().getUniqueId());
-        pendingEquipChecks.remove(event.getPlayer().getUniqueId());
+        Player player = event.getPlayer();
+        // The set re-activates on join, so take its effects off now rather than letting the
+        // player's saved data keep infinite potions after the set is gone
+        if (playerEquipStatusHashMap.remove(player.getUniqueId()) == EquipStatus.EQUIPPED) {
+            AttributeService.removeAllAttributes(player);
+            PotionEffectService.removePotionEffects(player);
+        }
+        pendingEquipChecks.remove(player.getUniqueId());
     }
 
     /**

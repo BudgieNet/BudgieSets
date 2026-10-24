@@ -38,7 +38,7 @@ public class JumpProcessor implements EventProcessor {
         private void onPlayerJump(PlayerJumpEvent jumpEvent) {
             Player player = jumpEvent.getPlayer();
 
-            if (!playerEquipStatus.containsKey(player.getUniqueId())) return;
+            if (playerEquipStatus.get(player.getUniqueId()) != EquipStatus.EQUIPPED) return;
             EquipStatus currentStatus = playerEquipStatus.get(player.getUniqueId());
             if (checkMap(effectsMap, player, cooldownMap)) {
                 effectManager.processEffectsMap(effectsMap, player, currentStatus, jumpEvent);

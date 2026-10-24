@@ -38,7 +38,7 @@ public class RiptideProcessor implements EventProcessor {
         private void onPlayerSprint(PlayerRiptideEvent riptideEvent) {
             Player player = riptideEvent.getPlayer();
 
-            if (!playerEquipStatus.containsKey(player.getUniqueId())) return;
+            if (playerEquipStatus.get(player.getUniqueId()) != EquipStatus.EQUIPPED) return;
             EquipStatus currentStatus = playerEquipStatus.get(player.getUniqueId());
             if (checkMap(effectsMap, player, cooldownMap)) {
                 effectManager.processEffectsMap(effectsMap, player, currentStatus, riptideEvent);

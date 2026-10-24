@@ -39,7 +39,7 @@ public class SneakProcessor implements EventProcessor {
         private void onPlayerSneak(PlayerToggleSneakEvent sneakEvent) {
             Player player = sneakEvent.getPlayer();
 
-            if (!playerEquipStatus.containsKey(player.getUniqueId())) return;
+            if (playerEquipStatus.get(player.getUniqueId()) != EquipStatus.EQUIPPED) return;
             EquipStatus currentStatus = playerEquipStatus.get(player.getUniqueId());
             if (checkMap(effectsMap, player, cooldownMap)) {
                 effectManager.processEffectsMap(effectsMap, player, currentStatus, sneakEvent);

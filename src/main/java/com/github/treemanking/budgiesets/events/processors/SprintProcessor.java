@@ -39,7 +39,7 @@ public class SprintProcessor implements EventProcessor {
         private void onPlayerSprint(PlayerToggleSprintEvent sprintEvent) {
             Player player = sprintEvent.getPlayer();
 
-            if (!playerEquipStatus.containsKey(player.getUniqueId())) return;
+            if (playerEquipStatus.get(player.getUniqueId()) != EquipStatus.EQUIPPED) return;
             EquipStatus currentStatus = playerEquipStatus.get(player.getUniqueId());
             if (checkMap(effectsMap, player, cooldownMap)) {
                 effectManager.processEffectsMap(effectsMap, player, currentStatus, sprintEvent);
