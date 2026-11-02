@@ -30,7 +30,7 @@ public class CommandManager {
         CommandAPICommand budgieSetsCommand = new CommandAPICommand("budgiesets");
 
         for (SubCommand subCommand : subCommands(files, loader)) {
-            budgieSetsCommand.withSubcommand(subCommand.build());
+            budgieSetsCommand.withAliases("bsets").withSubcommand(subCommand.build());
         }
 
         budgieSetsCommand.register(plugin);
