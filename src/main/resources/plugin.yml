@@ -6,4 +6,5 @@ author: ${author}
 
 softdepend:
   - PlaceholderAPI
+  - BudgieCore
 

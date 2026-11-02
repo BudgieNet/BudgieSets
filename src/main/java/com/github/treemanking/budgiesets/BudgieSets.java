@@ -33,6 +33,7 @@ public final class BudgieSets extends JavaPlugin {
         configurationManager = new ConfigurationManager(this);
         new ArmorSetManager(this, configurationManager);
         new CommandManager(this);
+        com.github.treemanking.budgiesets.hook.Core.init(this);
     }
 
     @Override
